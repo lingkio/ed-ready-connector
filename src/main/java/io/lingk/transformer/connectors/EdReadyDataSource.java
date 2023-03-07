@@ -160,8 +160,7 @@ public class EdReadyDataSource extends DataSource {
         try {
             this.token = getAuthToken();
 
-            if (StringUtils.isEmpty(this.pagination)) {
-                log.info("inside pagination");
+            if (StringUtils.isNotBlank(this.pagination)) {
                 JSONObject paginationJson = new JSONObject(this.pagination);
                 int currentPage = 1, limit = 500, totalPages = 1;
 
@@ -224,7 +223,6 @@ public class EdReadyDataSource extends DataSource {
                     }
                 } while (currentPage <= totalPages);
             } else {
-                log.info("without pagination");
                 this.closeableHttpClient = createHttpClient();
 
                 List<Header> headers = new ArrayList<>();
@@ -289,11 +287,11 @@ public class EdReadyDataSource extends DataSource {
 
         try {
             for (Map<String, Object> row : mapList) {
-                row.put("__parameters", context);
+//                row.put("__parameters", context);
                 resultsToAdd.add(row);
             }
 
-                    if (!resultsToAdd.isEmpty()) {
+            if (!resultsToAdd.isEmpty()) {
                 JavaRDD<String> rdd = RDDUtil.jsonStringToRDD(javaSparkContext, JsonUtil.serializeJson(resultsToAdd));
                 rdds.add(rdd);
             }
