@@ -1,0 +1,12 @@
+.classpath
+.project
+.settings
+target
+/eclipsebuild/
+/eclipse-classes/
+dependency-reduced-pom.xml
+*~
+.DS_Store
+.idea
+*.iml
+/tmp

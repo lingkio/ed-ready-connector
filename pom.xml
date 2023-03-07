@@ -1,0 +1,185 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>io.lingk.transformer</groupId>
+    <artifactId>ed-ready-connector</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>ed-ready-connector</name>
+    <description>This connector is to enhance and achieve the functionality of EdReady APIs</description>
+
+
+    <build>
+        <finalName>EdReady</finalName>
+    </build>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.8</java.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <scala.version>2.12</scala.version>
+        <spark.version>3.0.2</spark.version>
+        <jackson.version>2.6.5</jackson.version>
+    </properties>
+
+    <!--    distribution management (where artifacts will be deployed/downloaded) -->
+    <distributionManagement>
+        <repository>
+            <id>MyGet</id>
+            <url>https://www.myget.org/F/lingk-transformer-app/maven</url>
+        </repository>
+    </distributionManagement>
+
+
+    <dependencies>
+        <dependency>
+            <artifactId>google-api-client</artifactId>
+            <exclusions>
+                <exclusion> <!-- exclude an old version of Guava -->
+                    <artifactId>guava-jdk5</artifactId>
+                    <groupId>com.google.guava</groupId>
+                </exclusion>
+                <exclusion> <!-- exclude an old version of Guava -->
+                    <artifactId>guava</artifactId>
+                    <groupId>com.google.guava</groupId>
+                </exclusion>
+            </exclusions>
+            <groupId>com.google.api-client</groupId>
+            <version>1.23.0</version>
+        </dependency>
+
+        <dependency>
+            <artifactId>lombok</artifactId>
+            <groupId>org.projectlombok</groupId>
+            <optional>true</optional>
+            <version>1.18.22</version>
+        </dependency>
+
+        <dependency>
+            <artifactId>spark-sql_${scala.version}</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>protobuf-java</artifactId>
+                    <groupId>com.google.protobuf</groupId>
+                </exclusion>
+            </exclusions>
+            <groupId>org.apache.spark</groupId>
+            <scope>provided</scope>
+            <version>${spark.version}</version>
+        </dependency>
+
+        <dependency>
+            <artifactId>jackson-databind</artifactId>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+        <dependency>
+            <artifactId>jackson-dataformat-yaml</artifactId>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+        <dependency>
+            <artifactId>spark-salesforce_${scala.version}</artifactId>
+            <groupId>io.lingk</groupId>
+            <version>2.1.2</version>
+        </dependency>
+
+        <dependency>
+            <artifactId>spark-xml_${scala.version}</artifactId>
+            <groupId>com.databricks</groupId>
+            <version>0.11.0</version>
+        </dependency>
+
+        <dependency>
+            <artifactId>spark-excel_${scala.version}</artifactId>
+            <groupId>com.crealytics</groupId>
+            <version>0.13.5</version>
+        </dependency>
+
+        <dependency>
+            <artifactId>spark-google-spreadsheets_${scala.version}</artifactId>
+            <groupId>io.lingk</groupId>
+            <version>1.1.0</version>
+        </dependency>
+
+        <dependency>
+            <artifactId>spark-streaming_${scala.version}</artifactId>
+            <groupId>org.apache.spark</groupId>
+            <version>${spark.version}</version>
+        </dependency>
+        <dependency>
+            <artifactId>spark-sqs-receiver_${scala.version}</artifactId>
+            <groupId>io.lingk</groupId>
+            <version>1.1.0</version>
+        </dependency>
+
+        <dependency>
+            <artifactId>spark-transformer-core</artifactId>
+            <groupId>io.lingk.transformer</groupId>
+            <version>2.3.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>2.17.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.17.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>3.0.1</version>
+        </dependency>
+    </dependencies>
+
+    <!--    repositories -->
+    <repositories>
+        <repository>
+            <id>MyGet</id>
+            <url>https://www.myget.org/F/lingk-transformer-app/maven</url>
+        </repository>
+        <repository>
+            <id>MyGet-spark-transformer-core</id>
+            <url>https://www.myget.org/F/spark-transformer-core/maven</url>
+        </repository>
+        <repository>
+            <id>MyGet-transformer-dependencies</id>
+            <url>https://www.myget.org/F/transformer-dependencies-lingk/maven/</url>
+        </repository>
+        <repository>
+            <id>MyGet-spark-sqs-receiver</id>
+            <url>https://www.myget.org/F/spark-sqs-receiver/maven/</url>
+        </repository>
+        <repository>
+            <id>MyGet-spark-google-spreadsheets</id>
+            <url>https://www.myget.org/F/spark-google-spreadsheets/maven/</url>
+        </repository>
+        <repository>
+            <id>MyGet-spark-salesforce</id>
+            <url>https://www.myget.org/F/spark-salesforce/maven/</url>
+        </repository>
+        <repository>
+            <id>MyGet-cloud-sql-jdbc-socket-factory</id>
+            <url>https://www.myget.org/F/cloud-sql-jdbc-socket-factory-lingk/maven</url>
+        </repository>
+        <repository>
+            <id>MyGet-salesforce-wave-api</id>
+            <url>https://www.myget.org/F/salesforce-wave-api/maven/</url>
+        </repository>
+        <repository>
+            <id>redshift</id>
+            <url>http://redshift-maven-repository.s3-website-us-east-1.amazonaws.com/release</url>
+        </repository>
+    </repositories>
+</project>
